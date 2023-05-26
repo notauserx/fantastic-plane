@@ -1,0 +1,14 @@
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+bin/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+.vscode

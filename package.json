@@ -1,0 +1,16 @@
+{
+  "name": "airplane-seating",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bin/index.js",
+  "scripts": {
+    "build": "tsc",
+    "run": "npm bin/index.js",
+    "test": "npm test"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.0.4"
+  }
+}
