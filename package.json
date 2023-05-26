@@ -5,7 +5,7 @@
   "main": "bin/index.js",
   "scripts": {
     "build": "tsc",
-    "run": "npm bin/index.js",
+    "start": "node bin/index.js",
     "test": "jest"
   },
   "directories": {
