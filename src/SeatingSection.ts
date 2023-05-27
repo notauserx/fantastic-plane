@@ -1,4 +1,4 @@
-import { createSeat } from "./Factories";
+import { CreateSeat } from "./Factory/CreateSeat";
 import { Seat, SeatPosition } from "./Seat";
 import { SeatingSectionDetails } from "./SeatingSectionDetails";
 
@@ -20,7 +20,7 @@ export abstract class SeatingSection {
         for (let i = 0; i < this._rowCount; i++) {
             const ithRow: Seat[] = new Array<Seat>(this._colCount);
             for (let j = 0; j < this._colCount; j++) {
-                const seat = createSeat(new SeatPosition(i, j, this));
+                const seat = CreateSeat(new SeatPosition(i, j, this));
                 this._details.updateDetails(seat);
                 ithRow[j] = seat;
             }

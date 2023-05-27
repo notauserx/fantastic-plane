@@ -1,11 +1,11 @@
-import { createSeatingSection } from "./Factories";
 import { SectionDetail } from "./SectionDetail";
 import { SeatingSection } from "./SeatingSection";
+import { CreateSeatingSection } from "./Factory/CreateSeatingSection";
 
 
 export function initializeSeatingSections(sectionDetails: SectionDetail[]): SeatingSection[] {
     return sectionDetails.map((section, i) =>
-        createSeatingSection(section, i == 0, i == sectionDetails.length - 1));
+        CreateSeatingSection(section, i == 0, i == sectionDetails.length - 1));
     }
 
 export function generateSectionDetails(input: number[][]): SectionDetail[] {

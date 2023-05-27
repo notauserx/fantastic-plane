@@ -1,4 +1,4 @@
-import { createSeat } from "../src/Factories";
+import { CreateSeat as createSeat} from "../src/Factory/CreateSeat";
 import { AisleSeat, MiddleSeat, SeatPosition, WindowSeat } from "../src/Seat";
 import { SingleSeatingSection, LeftSeatingSection, RightSeatingSection, MiddleSeatingSection } from "../src/SeatingSection";
 
