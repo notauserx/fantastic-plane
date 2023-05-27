@@ -9,7 +9,7 @@
 - Restore the packages
 
 ```
-npm restore
+npm install
 ```
 
 - To build and run the project
