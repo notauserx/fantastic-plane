@@ -1,4 +1,4 @@
-import { Seat, SeatType } from "./Seat";
+import { SeatType } from "./Seat";
 import { SeatingSection } from "./SeatingSection";
 
 export class SeatBookingState {
