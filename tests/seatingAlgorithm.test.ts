@@ -1,85 +1,59 @@
 import { CreateSeat as createSeat} from "../src/Factory/CreateSeat";
 import { AisleSeat, MiddleSeat, SeatPosition, WindowSeat } from "../src/Seat";
-import { SingleSeatingSection, LeftSeatingSection, RightSeatingSection, MiddleSeatingSection } from "../src/SeatingSection";
+import { SeatBookingState } from "../src/SeatBookingState";
+import { SingleSeatingSection, LeftSeatingSection, RightSeatingSection, MiddleSeatingSection, SeatingSection } from "../src/SeatingSection";
+import { SeatingAlgorithm } from "../src/Domain/SeatingAlgorithm";
 
 describe('SeatingAlgorithm', () => {
-  describe('test creating WindowSeats', () => {
-    test('first col of left seating section seat should be a window Seat', () => {
-      expect(createSeat(new SeatPosition(1, 0, new LeftSeatingSection(2, 2))))
-        .toBeInstanceOf(WindowSeat);
+  describe('test passenger number', () => {
+    test('returns 0 when all passengers are assigned', () => {
+      const sections: SeatingSection[] = [
+        new LeftSeatingSection(2, 2),
+        new RightSeatingSection(3, 3)
+      ];
+      const state = new SeatBookingState(sections, 2);
+      state.aisleSeatAssigned = 2;
+
+      const passenger = SeatingAlgorithm.getPassengerNumberForSeat(sections[0].seats[0][0], state);
+
+      expect(passenger).toBe(0);
     });
 
-    test('last col of right seating section seat should be a window Seat', () => {
-      expect(createSeat(new SeatPosition(1, 1, new RightSeatingSection(2, 2))))
-        .toBeInstanceOf(WindowSeat);
-    });
+    
     
   });
   
-  describe('test creating AisleSeats', () => {
-    test('last col of left seating section seat should be a aisle seat', () => {
-      expect(createSeat(new SeatPosition(1, 1, new LeftSeatingSection(2, 2))))
-        .toBeInstanceOf(AisleSeat);
+  describe('test assigning AisleSeats', () => {
+    test('seats the first passenger on the leftmost aisle seat of first row', () => {
+      
+      const sections: SeatingSection[] = [
+        new LeftSeatingSection(2, 2),
+        new RightSeatingSection(3, 3)
+      ];
+      const state = new SeatBookingState(sections, 2);
+
+      const passenger = SeatingAlgorithm.getPassengerNumberForSeat(sections[0].seats[0][1], state);
+      
+      expect(passenger).toBe(1);
     });
-
-    test('first col of middle seating section seat should be a aisle seat', () => {
-      expect(createSeat(new SeatPosition(1, 0, new MiddleSeatingSection(2, 2))))
-        .toBeInstanceOf(AisleSeat);
-    });
-
-    test('last col of middle seating section seat should be a aisle seat', () => {
-      expect(createSeat(new SeatPosition(1, 1, new MiddleSeatingSection(2, 2))))
-        .toBeInstanceOf(AisleSeat);
-    });
-
-    test('first col of right seating section seat should be a aisle seat', () => {
-      expect(createSeat(new SeatPosition(1, 0, new RightSeatingSection(2, 2))))
-        .toBeInstanceOf(AisleSeat);
-    });
-
-    test('first col of single seating section seat should not be a aisle seat', () => {
-      var seat = createSeat(new SeatPosition(1, 0, new SingleSeatingSection(2, 2)));
-
-      expect(seat instanceof AisleSeat)
-        .toBe(false);
-    });
-
-    test('first col of left seating section seat should not be a aisle seat', () => {
-      var seat = createSeat(new SeatPosition(1, 0, new LeftSeatingSection(2, 2)));
-
-      expect(seat instanceof AisleSeat)
-        .toBe(false);
-    });
-
-    test('last col of single seating section seat should not be a aisle seat', () => {
-      var seat = createSeat(new SeatPosition(1, 1, new SingleSeatingSection(2, 2)));
-
-      expect(seat instanceof AisleSeat)
-        .toBe(false);
-    });
-
   });
 
-  describe('test creating MiddleSeats', () => {
-    test('middle col of left seating section seat should be a middle Seat', () => {
-      expect(createSeat(new SeatPosition(1, 1, new LeftSeatingSection(2, 3))))
-        .toBeInstanceOf(MiddleSeat);
-    });
+  describe('test assigning WindowSeats', () => {
+    test('seats the first passenger on the leftmost window seat after aisle seats are assigned', () => {
+      
+      const sections: SeatingSection[] = [
+        new LeftSeatingSection(2, 2),
+        new RightSeatingSection(3, 3)
+      ];
+      const state = new SeatBookingState(sections, 12);
 
-    test('middle col of middle seating section seat should be a middle Seat', () => {
-      expect(createSeat(new SeatPosition(1, 1, new MiddleSeatingSection(2, 3))))
-        .toBeInstanceOf(MiddleSeat);
+      const passenger = SeatingAlgorithm.getPassengerNumberForSeat(sections[0].seats[0][0], state);
+      
+      expect(passenger).toBe(5 + 1);
     });
+  });
 
-    test('middle col of right seating section seat should be a middle Seat', () => {
-      expect(createSeat(new SeatPosition(1, 1, new RightSeatingSection(2, 3))))
-        .toBeInstanceOf(MiddleSeat);
-    });
-
-    test('middle col of single seating section seat should be a middle Seat', () => {
-      expect(createSeat(new SeatPosition(1, 1, new SingleSeatingSection(2, 3))))
-        .toBeInstanceOf(MiddleSeat);
-    });
+  describe('test assigning MiddleSeats', () => {
   });
   
 });
