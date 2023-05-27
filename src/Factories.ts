@@ -28,7 +28,7 @@ export function createSeat(position: SeatPosition): Seat {
         return new MiddleSeat(position);
 }
 
-const seatDefinition = {
+export const seatDefinition = {
     isLeftWindowSeat: (position: SeatPosition) => (
         (position.section instanceof LeftSeatingSection && position.col == 0) ||
         (position.section instanceof SingleSeatingSection && position.col == 0)
@@ -37,8 +37,6 @@ const seatDefinition = {
     isRightWindowSeat: (position: SeatPosition) => (
         (position.section instanceof RightSeatingSection && position.col + 1 == position.section.colCount) ||
         (position.section instanceof SingleSeatingSection && position.col + 1 == position.section.colCount)
-
-        
     ),
     
     isAisleSeat: (position: SeatPosition) => 
