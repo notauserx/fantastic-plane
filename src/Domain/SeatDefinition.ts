@@ -3,7 +3,7 @@ import { LeftSeatingSection, SingleSeatingSection, RightSeatingSection, MiddleSe
 
 export const SeatDefinition = {
     isWindowSeat: (position: SeatPosition) => {
-        return SeatDefinition.isLeftWindowSeat(position) || 
+        return SeatDefinition.isLeftWindowSeat(position) ||
             SeatDefinition.isRightWindowSeat(position);
     },
 

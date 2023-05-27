@@ -1,8 +1,5 @@
 import { AisleSeat, MiddleSeat, Seat, WindowSeat } from "./Seat";
 
-
-
-
 export class SeatingSectionDetails {
     constructor(public windowSeatCount: number = 0, public aisleSeatCount: number = 0, public middleSeatCount: number = 0) { }
 
