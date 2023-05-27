@@ -92,6 +92,12 @@ export abstract class SeatingSection {
     }
 }
 
+export class SingleSeatingSection extends SeatingSection {
+    constructor(rowCount: number, colCount: number) {
+        super(SectionType.Left, rowCount, colCount)
+    }
+}
+
 export class LeftSeatingSection extends SeatingSection {
 
     constructor(rowCount: number, colCount: number) {

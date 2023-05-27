@@ -1,11 +1,16 @@
-import { Seat, SectionDetail, SeatingSection, LeftSeatingSection, MiddleSeatingSection, RightSeatingSection, WindowSeat, SeatPosition, AisleSeat, MiddleSeat } from "./Types";
+import { Seat, SectionDetail, SeatingSection, LeftSeatingSection, MiddleSeatingSection, RightSeatingSection, WindowSeat, SeatPosition, AisleSeat, MiddleSeat, SingleSeatingSection } from "./Types";
 
 export function createSeatingSection(sectionDetail: SectionDetail, isFirst: boolean, isLast: boolean): SeatingSection {
+    if(isFirst && isLast)
+        return new SingleSeatingSection(sectionDetail.rows, sectionDetail.columns);
+    
     if (isFirst)
         return new LeftSeatingSection(sectionDetail.rows, sectionDetail.columns);
 
     if (isLast)
         return new RightSeatingSection(sectionDetail.rows, sectionDetail.columns);
+
+    
 
     return new MiddleSeatingSection(sectionDetail.rows, sectionDetail.columns);
 }
@@ -22,11 +27,17 @@ export function createSeat(position: SeatPosition): Seat {
 }
 
 const seatDefinition = {
-    isLeftWindowSeat: (position: SeatPosition) => 
-        (position.section instanceof LeftSeatingSection && position.col == 0),
+    isLeftWindowSeat: (position: SeatPosition) => (
+        (position.section instanceof LeftSeatingSection && position.col == 0) ||
+        (position.section instanceof SingleSeatingSection && position.col == 0)
+    ),
 
-    isRightWindowSeat: (position: SeatPosition) => 
-        (position.section instanceof RightSeatingSection && position.col + 1 == position.section.colCount),
+    isRightWindowSeat: (position: SeatPosition) => (
+        (position.section instanceof RightSeatingSection && position.col + 1 == position.section.colCount) ||
+        (position.section instanceof SingleSeatingSection && position.col + 1 == position.section.colCount)
+
+        
+    ),
     
     isAisleSeat: (position: SeatPosition) => 
         (position.section instanceof LeftSeatingSection && position.col + 1 == position.section.colCount) ||
