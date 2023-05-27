@@ -1,7 +1,5 @@
-import { CreateSeat as createSeat} from "../src/Factory/CreateSeat";
-import { AisleSeat, MiddleSeat, SeatPosition, WindowSeat } from "../src/Seat";
 import { SeatBookingState } from "../src/SeatBookingState";
-import { SingleSeatingSection, LeftSeatingSection, RightSeatingSection, MiddleSeatingSection, SeatingSection } from "../src/SeatingSection";
+import { LeftSeatingSection, RightSeatingSection, SeatingSection } from "../src/SeatingSection";
 import { SeatingAlgorithm } from "../src/Domain/SeatingAlgorithm";
 
 describe('SeatingAlgorithm', () => {
@@ -53,7 +51,18 @@ describe('SeatingAlgorithm', () => {
     });
   });
 
-  describe('test assigning MiddleSeats', () => {
+  describe('test assigning middle seats', () => {
+    test('seats the first passenger on the leftmost middle seat after aisle seats and window seats are assigned', () => {
+      const sections: SeatingSection[] = [
+        new LeftSeatingSection(2, 2),
+        new RightSeatingSection(3, 3)
+      ];
+      const state = new SeatBookingState(sections, 12);
+
+      const passenger = SeatingAlgorithm.getPassengerNumberForSeat(sections[1].seats[0][1], state);
+      
+      expect(passenger).toBe(5 + 5 + 1);
+    });
   });
   
 });
