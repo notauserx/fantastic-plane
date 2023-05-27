@@ -1,5 +1,6 @@
 import { createSeatingSection } from "./Factories";
-import { SectionDetail, SeatingSection } from "./Types";
+import { SectionDetail } from "./SectionDetail";
+import { SeatingSection } from "./SeatingSection";
 
 
 export function initializeSeatingSections(sectionDetails: SectionDetail[]): SeatingSection[] {

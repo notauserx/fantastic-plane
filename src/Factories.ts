@@ -1,4 +1,6 @@
-import { Seat, SectionDetail, SeatingSection, LeftSeatingSection, MiddleSeatingSection, RightSeatingSection, WindowSeat, SeatPosition, AisleSeat, MiddleSeat, SingleSeatingSection } from "./Types";
+import { LeftSeatingSection, MiddleSeatingSection, RightSeatingSection, SeatingSection, SingleSeatingSection } from "./SeatingSection";
+import { AisleSeat, MiddleSeat, Seat, SeatPosition, WindowSeat } from "./Seat";
+import { SectionDetail } from "./SectionDetail";
 
 export function createSeatingSection(sectionDetail: SectionDetail, isFirst: boolean, isLast: boolean): SeatingSection {
     if(isFirst && isLast)
